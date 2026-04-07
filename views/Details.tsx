@@ -1,13 +1,10 @@
 import { View, Text, Button, StyleSheet } from 'react-native';
 
-export default function Home({ navigation }: any) {
+export default function Details({ navigation }: any) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Accueil 🏠</Text>
-      <Button 
-        title="Aller vers le Profil" 
-        onPress={() => navigation.navigate('Details')} 
-      />
+      <Text style={styles.title}>Page Profil 👤</Text>
+      <Button title="Retour" onPress={() => navigation.goBack()} />
     </View>
   );
 }
