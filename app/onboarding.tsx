@@ -12,6 +12,7 @@ export default function OnboardingScreen() {
       <ThemedText type="title" style={styles.mainTitle}>Bienvenue sur Mobile Library</ThemedText>
       <ThemedText type="default">Explorez des milliers de livres grâce à l'API Open Library.</ThemedText>
     </ThemedView>
+    
   );
 }
 

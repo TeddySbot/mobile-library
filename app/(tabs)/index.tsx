@@ -1,19 +1,14 @@
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { Redirect } from 'expo-router';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
 export default function HomeScreen() {
-  const onboarding = true; // Simulate onboarding state
+  const onboarding = false; 
   if (onboarding) {
-    return (
-      <ThemedView style={styles.center}>
-        <FontAwesome name="book" size={64} color="#A1CEDC" />
-        <ThemedText type="title" style={styles.mainTitle}>Bienvenue sur Mobile Library</ThemedText>
-        <ThemedText type="default">Explorez des milliers de livres grâce à l'API Open Library.</ThemedText>
-      </ThemedView>
-    );
+    return <Redirect href="/onboarding" />;
   }
 
 
