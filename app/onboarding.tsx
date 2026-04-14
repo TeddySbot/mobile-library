@@ -1,16 +1,30 @@
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from 'expo-router';
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { Button, StyleSheet } from 'react-native';
 
 export default function OnboardingScreen() {
+  const router = useRouter();
+
+  const handleFinish = async () => {
+    await AsyncStorage.setItem('onboarding_done', 'true');
+    router.push('/(tabs)');
+  };
 
   return (
     <ThemedView style={styles.center}>
       <FontAwesome name="book" size={64} color="#A1CEDC" />
       <ThemedText type="title" style={styles.mainTitle}>Bienvenue sur Mobile Library</ThemedText>
       <ThemedText type="default">Explorez des milliers de livres grâce à l'API Open Library.</ThemedText>
+    <Button 
+        title="Commencer" 
+        onPress={handleFinish} 
+        color="#A1CEDC"
+      />
+    
     </ThemedView>
     
   );
