@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, FlatList, ActivityIndicator, View } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 
-export default function HomeScreen() {
+export default function ExploreScreen() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
