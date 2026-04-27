@@ -1,7 +1,7 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Redirect } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   Image,
@@ -65,7 +65,7 @@ export default function HomeScreen() {
 
   useEffect(() => {
     AsyncStorage.getItem('onboarding_done').then((value) => {
-      setOnboardingDone(value === 'false');
+      setOnboardingDone(value === 'true');
     });
   }, []);
 
