@@ -65,7 +65,7 @@ export default function HomeScreen() {
 
   useEffect(() => {
     AsyncStorage.getItem('onboarding_done').then((value) => {
-      setOnboardingDone(value === 'true');
+      setOnboardingDone(value === 'false');
     });
   }, []);
 
