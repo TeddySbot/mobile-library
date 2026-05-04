@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "mobile-library",
-    "slug": "mobile-library",
+    "slug": "library-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -43,6 +43,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "9b2c27b7-1074-4ba1-acf3-f3c1d2a96eb7"
+      }
+    },
+    "owner": "ynov-b2-library-mobile"
   }
 }
