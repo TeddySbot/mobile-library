@@ -50,6 +50,12 @@
         "projectId": "9b2c27b7-1074-4ba1-acf3-f3c1d2a96eb7"
       }
     },
-    "owner": "ynov-b2-library-mobile"
+    "owner": "ynov-b2-library-mobile",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/9b2c27b7-1074-4ba1-acf3-f3c1d2a96eb7"
+    }
   }
 }
