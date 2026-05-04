@@ -1,6 +1,6 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Redirect } from 'expo-router';
+import { Redirect, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
@@ -134,7 +134,21 @@ export default function HomeScreen() {
     };
   }, [selectedTab]);
 
+  const router = useRouter();
   const heroBook = featuredBooks[0];
+
+  const navigateToBook = (book: OpenLibraryDoc) => {
+    router.push({
+      pathname: '/book/[id]',
+      params: {
+        id: book.key,
+        title: book.title,
+        author: formatAuthor(book),
+        year: String(book.first_publish_year ?? 'N/A'),
+        coverUrl: coverUrl(book.cover_i, 'M'),
+      },
+    });
+  };
 
   if (onboardingDone === null) return null;
 
@@ -174,7 +188,7 @@ export default function HomeScreen() {
         <Text style={styles.sectionTitle}>New release.</Text>
 
         {heroBook ? (
-          <View style={styles.heroCard}>
+          <TouchableOpacity activeOpacity={0.85} onPress={() => navigateToBook(heroBook)} style={styles.heroCard}>
             <Image source={{ uri: coverUrl(heroBook.cover_i, 'L') }} style={styles.heroImage} resizeMode="cover" />
             <View style={styles.heroOverlay}>
               <Text style={styles.heroTitle} numberOfLines={1}>
@@ -187,7 +201,7 @@ export default function HomeScreen() {
                 <Text style={styles.heroRating}>★★★★★ {Math.round(getRatingValue(heroBook) * 60)} users</Text>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
         ) : (
           <Text style={styles.emptyState}>Aucune sortie trouvée.</Text>
         )}
@@ -195,7 +209,11 @@ export default function HomeScreen() {
         <Text style={styles.sectionTitle}>Continue Reading.</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.rowList}>
           {continueBooks.slice(0, 5).map((book) => (
-            <View key={book.key} style={styles.smallCard}>
+            <TouchableOpacity
+              key={book.key}
+              activeOpacity={0.8}
+              onPress={() => navigateToBook(book)}
+              style={styles.smallCard}>
               <Image source={{ uri: coverUrl(book.cover_i, 'M') }} style={styles.smallCardImage} resizeMode="cover" />
               <Text style={styles.smallCardTitle} numberOfLines={1}>
                 {book.title}
@@ -203,7 +221,7 @@ export default function HomeScreen() {
               <Text style={styles.smallCardMeta} numberOfLines={1}>
                 T.{Math.max(1, (book.first_publish_year ?? 2020) % 10)} Episode {Math.max(1, (book.want_to_read_count ?? 12) % 12)}
               </Text>
-            </View>
+            </TouchableOpacity>
           ))}
         </ScrollView>
 
@@ -229,13 +247,17 @@ export default function HomeScreen() {
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.rowList}>
           {forYouBooks.slice(0, 8).map((book) => (
-            <View key={book.key} style={styles.posterCard}>
+            <TouchableOpacity
+              key={book.key}
+              activeOpacity={0.8}
+              onPress={() => navigateToBook(book)}
+              style={styles.posterCard}>
               <Image source={{ uri: coverUrl(book.cover_i, 'M') }} style={styles.posterImage} resizeMode="cover" />
               <Text style={styles.posterTitle} numberOfLines={1}>
                 {book.title}
               </Text>
               <Text style={styles.posterYear}>{book.first_publish_year ?? 2022}</Text>
-            </View>
+            </TouchableOpacity>
           ))}
         </ScrollView>
       </View>

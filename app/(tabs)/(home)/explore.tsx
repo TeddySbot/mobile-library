@@ -1,6 +1,7 @@
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { FontAwesome } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
@@ -72,6 +73,7 @@ export default function ExploreScreen() {
   const [query, setQuery] = useState(FALLBACK_QUERY);
   const [selectedCategory, setSelectedCategory] = useState(categories[0].id);
   const { width } = useWindowDimensions();
+  const router = useRouter();
 
   const posterWidth = (width - 56) / 3;
 
@@ -130,7 +132,20 @@ export default function ExploreScreen() {
           keyExtractor={(item: Book) => item.id}
           numColumns={3}
           renderItem={({ item }: { item: Book }) => (
-            <View style={[styles.posterCard, { width: posterWidth }]}>
+            <Pressable
+              style={[styles.posterCard, { width: posterWidth }]}
+              onPress={() =>
+                router.push({
+                  pathname: '/book/[id]',
+                  params: {
+                    id: item.id,
+                    title: item.title,
+                    author: item.author,
+                    year: String(item.year),
+                    coverUrl: item.coverUrl ?? '',
+                  },
+                })
+              }>
               <View style={styles.posterImageWrapper}>
                 {item.coverUrl ? (
                   <Image source={{ uri: item.coverUrl }} style={styles.posterImage} />
@@ -147,7 +162,7 @@ export default function ExploreScreen() {
               <ThemedText style={styles.posterMeta} numberOfLines={1}>
                 {item.year}
               </ThemedText>
-            </View>
+            </Pressable>
           )}
           columnWrapperStyle={styles.gridRow}
           showsVerticalScrollIndicator={false}
