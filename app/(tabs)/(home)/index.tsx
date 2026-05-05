@@ -61,6 +61,7 @@ export default function HomeScreen() {
   const [forYouBooks, setForYouBooks] = useState<OpenLibraryDoc[]>([]);
   const [selectedTab, setSelectedTab] = useState<FeedTab['label']>('For you');
   const [tabLoading, setTabLoading] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const username = 'Moi';
 
   useEffect(() => {
@@ -180,9 +181,36 @@ export default function HomeScreen() {
               <Text style={styles.name}>{username}</Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.menuButton} activeOpacity={0.8}>
-            <FontAwesome name="bars" size={22} color="#f2f4f8" />
-          </TouchableOpacity>
+          <View style={styles.menuContainer}>
+            <TouchableOpacity 
+              style={styles.menuButton} 
+              activeOpacity={0.7}
+              onPress={() => setMenuOpen(!menuOpen)}
+            >
+              <FontAwesome name="bars" size={22} color="#f2f4f8" />
+            </TouchableOpacity>
+            
+            {menuOpen && (
+              <View style={styles.dropdownMenu}>
+                <TouchableOpacity style={styles.menuItem} onPress={() => { setMenuOpen(false); /* Action */ }}>
+                  <FontAwesome name="user" size={16} color="#f2f4f8" />
+                  <Text style={styles.menuItemText}>Mon profil</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.menuItem} onPress={() => { setMenuOpen(false); /* Action */ }}>
+                  <FontAwesome name="heart" size={16} color="#f2f4f8" />
+                  <Text style={styles.menuItemText}>Favoris</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.menuItem} onPress={() => { setMenuOpen(false); /* Action */ }}>
+                  <FontAwesome name="cog" size={16} color="#f2f4f8" />
+                  <Text style={styles.menuItemText}>Paramètres</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.menuItem} onPress={() => { setMenuOpen(false); /* Action */ }}>
+                  <FontAwesome name="sign-out" size={16} color="#f2f4f8" />
+                  <Text style={styles.menuItemText}>Déconnexion</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+          </View>
         </View>
 
         <Text style={styles.sectionTitle}>New release.</Text>
@@ -319,6 +347,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontFamily: 'Axiforma-Bold',
   },
+  menuContainer: {
+    position: 'relative',
+  },
   menuButton: {
     width: 34,
     height: 34,
@@ -327,6 +358,37 @@ const styles = StyleSheet.create({
     borderColor: '#2a3242',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  dropdownMenu: {
+    position: 'absolute',
+    top: 40,
+    right: 0,
+    backgroundColor: '#1a1e2a',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#2a3242',
+    paddingVertical: 8,
+    minWidth: 150,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 10,
+    zIndex: 2,
+  },
+  menuItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    gap: 12,
+    zIndex: 2,
+  },
+  menuItemText: {
+    color: '#f2f4f8',
+    fontSize: 14,
+    fontFamily: 'Axiforma-Bold',
+    zIndex: 2,
   },
   sectionTitle: {
     color: '#f5f7fb',
@@ -342,10 +404,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginHorizontal: '2.5%',
     backgroundColor: '#1c2230',
+    zIndex: 0,
   },
   heroImage: {
     width: '100%',
     height: '100%',
+    zIndex: 0,
   },
   heroOverlay: {
     position: 'absolute',
@@ -355,28 +419,33 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 8,
     backgroundColor: 'rgba(10, 12, 18, 0.38)',
+    zIndex: 0,
   },
   heroTitle: {
     color: '#fff',
     fontSize: 20,
     fontWeight: '700',
     fontFamily: 'Axiforma-Bold',
+    zIndex: 0,
   },
   heroMetaRow: {
     marginTop: 2,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    zIndex: 0,
   },
   heroAuthor: {
     color: '#c5ccdb',
     fontSize: 11,
     maxWidth: '56%',
+    zIndex: 0,
   },
   heroRating: {
     color: '#f4d03f',
     fontSize: 11,
     fontWeight: '600',
+    zIndex: 0,
   },
   rowList: {
     paddingRight: 12,
