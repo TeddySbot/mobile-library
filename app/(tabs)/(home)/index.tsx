@@ -196,7 +196,7 @@ export default function HomeScreen() {
                   <FontAwesome name="user" size={16} color="#f2f4f8" />
                   <Text style={styles.menuItemText}>Mon profil</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.menuItem} onPress={() => { setMenuOpen(false); /* Action */ }}>
+                <TouchableOpacity style={styles.menuItem} onPress={() => { setMenuOpen(false); router.push('/library'); }}>
                   <FontAwesome name="heart" size={16} color="#f2f4f8" />
                   <Text style={styles.menuItemText}>Favoris</Text>
                 </TouchableOpacity>
