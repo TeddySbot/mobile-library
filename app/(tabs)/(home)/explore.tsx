@@ -129,14 +129,14 @@ export default function ExploreScreen() {
       <ThemedView style={styles.container} lightColor="#090B12" darkColor="#090B12">
         <FlatList
           data={books}
-          keyExtractor={(item: Book) => item.id}
+          keyExtractor={(item) => item.id}
           numColumns={3}
-          renderItem={({ item }: { item: Book }) => (
+          renderItem={({ item }) => (
             <Pressable
               style={[styles.posterCard, { width: posterWidth }]}
               onPress={() =>
                 router.push({
-                  pathname: '/book/[id]',
+                  pathname: '/book/[id]' as any,
                   params: {
                     id: item.id,
                     title: item.title,
